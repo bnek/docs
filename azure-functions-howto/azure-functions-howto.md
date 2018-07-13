@@ -6,6 +6,8 @@ Azure functions have one speciality that distinguish them from i.e. console apps
 
 App settings can be specified within the Azure Portal directly on the Function App, but that's not really helpful when you have a deployment pipeline with a handful of different environments that your Function App will be deployed to unless you'd like to get in and add/change config-variables by hand everytime something changes. I found this a bit disappointing when I first found out about it. Luckily, app settings can be specified as part of the deployment in VSTS as we will see.
 
+Remarks: This solution does not cover Connection Strings<sup>*</sup>.
+
 ## How it works
 1. [Create a new Function App](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function) in the Azure Portal.
 2. [Create a new Function App](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-your-first-function-visual-studio) in Visual Studio and check the source code into VSTS. 
@@ -25,3 +27,5 @@ App settings can be specified within the Azure Portal directly on the Function A
         <img src="img/app-settings.png" alt="drawing" width="300px"/>
 
 6. Finally, queue a build in your build defintion and deploy the release to see it working and ship you Azure Function App without manual steps.
+
+<sup>*</sup>Connection Strings cannot be updated using `Azure App Service Deploy` step. The only way I'm aware of to change Connection Strings via VSTS deployment is the use of ARM templates. This is not covered in this post.
